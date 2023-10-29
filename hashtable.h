@@ -34,6 +34,8 @@ class HashTable {
         */
         void insert(const std::string& decode, const std::string& encode);
         void cipher_input(std::ifstream& in_file,int num_of_lines);
+
+        std::string find_encoded(std::string value);
     private:
         HashNode *arr[50]; 
 };

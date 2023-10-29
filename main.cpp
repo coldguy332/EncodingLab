@@ -14,8 +14,12 @@ int main() {
     
     test.cipher_input(in_file,index);
 
-    test.get_data();
+    std::string a = "Success";
+    std::string c = "is";
+    std::string b = test.find_encoded(a);
+    std::string d = test.find_encoded(c);
    
-   
+    std::cout << b << d << std::endl;
+
     return 0;
 }

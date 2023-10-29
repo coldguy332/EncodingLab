@@ -70,3 +70,17 @@ void HashTable::cipher_input(std::ifstream& in_file, int num_of_lines) {
         this->insert(temp_decode,temp_encode);
     }
 }
+
+std::string HashTable::find_encoded(std::string value) {
+    std::string return_value = "";
+    for (int i = 0; i < value.size(); i++) {
+        std::string char_value(1,value[i]);
+        int pos = hash_code(char_value);
+        HashNode* current = this->arr[pos];
+        while (current->decoded != char_value && current != nullptr) {
+            current = current->next;
+        }
+        return_value += current->encoded + " ";
+    }
+    return return_value;
+}
