@@ -14,7 +14,7 @@ int main() {
     
     test.cipher_input(in_file,index);
 
-    //test.get_data();
+    test.get_data();
    
    
     return 0;

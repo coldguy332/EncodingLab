@@ -9,7 +9,8 @@
  * Hash node needs a next ptr while tree needs left&right ptr
 */
 struct HashNode{
-    std::string data;
+    std::string decoded;
+    std::string encoded;
     HashNode* next = nullptr;
 };
 

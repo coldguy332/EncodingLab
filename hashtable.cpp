@@ -30,7 +30,7 @@ void HashTable::get_data() const {
         if (arr[i] != nullptr) {
             HashNode* current = arr[i];
             while (current != nullptr) {
-                std::cout << current->data << " ";
+                std::cout << current->encoded << " ";
                 current = current->next;
             }
         }
@@ -44,7 +44,8 @@ void HashTable::get_data() const {
 
 void HashTable::insert(const std::string& decode, const std::string& encode) {
     HashNode* newnode = new HashNode;
-    newnode->data = encode;
+    newnode->encoded = encode;
+    newnode->decoded = decode;
     int pos = hash_code(decode);
     if (arr[pos] != nullptr) {
         newnode->next = arr[pos];
@@ -66,7 +67,6 @@ void HashTable::cipher_input(std::ifstream& in_file, int num_of_lines) {
         getline(ss, temp_decode, '\t');
         getline(ss, temp_encode, '\n');
 
-        std::cout << temp_encode << " " << temp_decode << std::endl;
         this->insert(temp_decode,temp_encode);
     }
 }
