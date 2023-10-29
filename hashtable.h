@@ -1,7 +1,12 @@
 #ifndef HASHTABLE_H
 #define HASHTABLE_H
 
+#include <iostream>
+#include <fstream>
+#include <sstream>
+
 #include "hashnode.h"
+#include "datainput.h" //Primarily for linecounter
 
 const int INDEX = 50; //Hash table size is 50
 
@@ -19,12 +24,16 @@ class HashTable {
          * Default constructor that sets all ptrs of hashtable to null
         */
         HashTable();
+
+        void get_data() const;
+
         /**
          * Inserts encoded value into hash table
          * @param decode this string will be used to make the hash code
          * @param encode this string will be stored in array under that hash code
         */
         void insert(const std::string& decode, const std::string& encode);
+        void cipher_input(std::ifstream& in_file,int num_of_lines);
     private:
         HashNode *arr[50]; 
 };

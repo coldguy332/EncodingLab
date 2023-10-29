@@ -20,9 +20,27 @@ int hash_code(const std::string& decode) {
 
 HashTable::HashTable() {
     for (int i = 0; i < INDEX; i++) {
-        this->arr[i]->data = nullptr;
+        this->arr[i]= nullptr;
     }
 }
+
+void HashTable::get_data() const {
+    for (int i = 0; i < 50; i++) {
+        std::cout << i << " ";
+        if (arr[i] != nullptr) {
+            HashNode* current = arr[i];
+            while (current != nullptr) {
+                std::cout << current->data << " ";
+                current = current->next;
+            }
+        }
+        else {
+            std::cout << " ";
+        }
+        std::cout << std::endl;
+    }
+}
+
 
 void HashTable::insert(const std::string& decode, const std::string& encode) {
     HashNode* newnode = new HashNode;
@@ -34,5 +52,21 @@ void HashTable::insert(const std::string& decode, const std::string& encode) {
     }
     else {
         arr[pos] = newnode;
+    }
+}
+
+void HashTable::cipher_input(std::ifstream& in_file, int num_of_lines) {
+    std::string temp_line;
+    std::string temp_encode;
+    std::string temp_decode;
+    for (int i = 0; i < num_of_lines; i++) {
+        getline(in_file,temp_line);
+        std::stringstream ss;
+        ss.str(temp_line);
+        getline(ss, temp_decode, '\t');
+        getline(ss, temp_encode, '\n');
+
+        std::cout << temp_encode << " " << temp_decode << std::endl;
+        this->insert(temp_decode,temp_encode);
     }
 }
