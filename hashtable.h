@@ -33,7 +33,7 @@ class HashTable {
          * @param encode this string will be stored in array under that hash code
         */
         void insert(const std::string& decode, const std::string& encode);
-        void cipher_input(std::ifstream& in_file,int num_of_lines);
+        void cipher_input(std::ifstream& in_file);
 
         std::string find_encoded(std::string value);
     private:

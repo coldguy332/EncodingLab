@@ -6,4 +6,10 @@ void welcome_statement() {
               << " the text file in the folder directory." << std::endl;
     std::cout << "Would you like to continue(Y/n):" ;
     std::cin >> choice;
+    if (choice == 'Y' || choice == 'y') {
+        read_file();
+    }
+    else if (choice == 'N' || choice == 'n') {
+        exit(0);
+    }
 }

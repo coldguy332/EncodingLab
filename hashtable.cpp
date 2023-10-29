@@ -56,7 +56,8 @@ void HashTable::insert(const std::string& decode, const std::string& encode) {
     }
 }
 
-void HashTable::cipher_input(std::ifstream& in_file, int num_of_lines) {
+void HashTable::cipher_input(std::ifstream& in_file) {
+    int num_of_lines = line_counter(in_file);
     std::string temp_line;
     std::string temp_encode;
     std::string temp_decode;
@@ -80,7 +81,12 @@ std::string HashTable::find_encoded(std::string value) {
         while (current->decoded != char_value && current != nullptr) {
             current = current->next;
         }
-        return_value += current->encoded + " ";
+        if ( i != value.size() - 1) {
+            return_value += current->encoded + " ";
+        }
+        else {
+            return_value += current->encoded + "  ";
+        }
     }
     return return_value;
 }
