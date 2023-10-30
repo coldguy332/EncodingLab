@@ -30,7 +30,7 @@ void HashTable::get_data() const {
         if (arr[i] != nullptr) {
             HashNode* current = arr[i];
             while (current != nullptr) {
-                std::cout << current->encoded << " ";
+                std::cout << current->encoded << " " << current->decoded << " ";
                 current = current->next;
             }
         }
@@ -46,7 +46,7 @@ void HashTable::insert(const std::string& decode, const std::string& encode) {
     HashNode* newnode = new HashNode;
     newnode->encoded = encode;
     newnode->decoded = decode;
-    int pos = hash_code(decode);
+    int pos = hash_code(encode);
     if (arr[pos] != nullptr) {
         newnode->next = arr[pos];
         arr[pos] = newnode;
@@ -66,27 +66,24 @@ void HashTable::cipher_input(std::ifstream& in_file) {
         std::stringstream ss;
         ss.str(temp_line);
         getline(ss, temp_decode, '\t');
-        getline(ss, temp_encode, '\n');
+        getline(ss, temp_encode);
 
         this->insert(temp_decode,temp_encode);
     }
 }
 
-std::string HashTable::find_encoded(std::string value) {
+std::string HashTable::find_decoded(std::string value) {
     std::string return_value = "";
-    for (int i = 0; i < value.size(); i++) {
-        std::string char_value(1,value[i]);
-        int pos = hash_code(char_value);
+    if (value == "-1") {
+        return_value += " ";
+    }
+    else {
+        int pos = hash_code(value);
         HashNode* current = this->arr[pos];
-        while (current->decoded != char_value && current != nullptr) {
+        while (current != nullptr && current->encoded != value) {
             current = current->next;
         }
-        if ( i != value.size() - 1) {
-            return_value += current->encoded + " ";
-        }
-        else {
-            return_value += current->encoded + "  ";
-        }
+        return_value += current->decoded;
     }
-    return return_value;
+    return return_value; 
 }

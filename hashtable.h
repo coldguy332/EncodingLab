@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <algorithm>
 
 #include "hashnode.h"
 #include "datainput.h" //Primarily for linecounter
@@ -35,7 +36,7 @@ class HashTable {
         void insert(const std::string& decode, const std::string& encode);
         void cipher_input(std::ifstream& in_file);
 
-        std::string find_encoded(std::string value);
+        std::string find_decoded(std::string value);
     private:
         HashNode *arr[50]; 
 };

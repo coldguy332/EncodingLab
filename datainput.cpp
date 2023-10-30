@@ -25,34 +25,38 @@ void read_file() {
 	if (temp_line[0] == '0' || temp_line[0] == '1') {
 		in_file.clear(); //Resets error flags on a stream such as EOF
 		in_file.seekg(0);//sets position of next character to be read back to beginning of file
+		decode_file(in_file);
 
 	}
 	else {
 		in_file.clear(); //Resets error flags on a stream such as EOF
 		in_file.seekg(0);//sets position of next character to be read back to beginning of file
-		encode_file(in_file);
 	}
 }
 
-void encode_file(std::ifstream& in_file) {
+void decode_file(std::ifstream& in_file) {
 	std::string temp_line;
-	std::string temp_word;
-	std::string encoded_value = "";
+	std::string temp_decoded;
+	std::string decoded_value = "";
 
 	HashTable* hash = new HashTable;
 	std::ifstream cipher;
 	cipher.open("cipher-1.txt");
 	hash->cipher_input(cipher);
-
+	
 	getline(in_file,temp_line);
 	std::stringstream ss;
 	ss.str(temp_line);
 
-	while (getline(ss,temp_word, ' ')) {
-		encoded_value += hash->find_encoded(temp_word);
+	while (getline(ss,temp_decoded, ' ')) {
+		if (temp_decoded.empty()) {
+			temp_decoded = "-1";
+		}
+		decoded_value += hash->find_decoded(temp_decoded);
 	}
 	
-	std::cout << std::endl << "Encoded text: " << encoded_value << std::endl;
+	std::cout << std::endl << "Decoded text: " << decoded_value << std::endl;
 	std::cout << "Saving to output.txt..." << std::endl;
-	output_data(temp_line, encoded_value);
+	output_data(temp_line, decoded_value);
+	
 }
