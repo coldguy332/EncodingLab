@@ -25,6 +25,7 @@ class HashTable {
          * Default constructor that sets all ptrs of hashtable to null
         */
         HashTable();
+        ~HashTable();
 
         void get_data() const;
 

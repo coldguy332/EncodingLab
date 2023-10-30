@@ -60,6 +60,8 @@ void decode_file(std::ifstream& in_file) {
 	std::cout << std::endl << "Decoded text: " << decoded_value << std::endl;
 	std::cout << "Saving to output.txt..." << std::endl;
 	output_data(temp_line, decoded_value);
+
+	delete hash;
 }
 
 void encode_file(std::ifstream& in_file) {
@@ -83,5 +85,7 @@ void encode_file(std::ifstream& in_file) {
 	std::cout << std::endl << "Encoded text: " << encoded_value << std::endl;
 	std::cout << "Saving to output.txt..." << std::endl;
 	output_data(temp_line, encoded_value);
+
+	delete tree;
 	
 }

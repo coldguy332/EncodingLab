@@ -4,6 +4,24 @@ BinarySearchTree::BinarySearchTree() {
     this->root = nullptr;
 }
 
+BinarySearchTree::~BinarySearchTree() {
+    del_tree(root);
+}
+
+void BinarySearchTree::del_tree(TreeNode* root) {
+    if (root == nullptr) {
+        return ;
+    }
+    else {
+        TreeNode* del = root;
+        TreeNode* left = root->left;
+        TreeNode* right = root->right;
+        delete del;
+        del_tree(left);
+        del_tree(right);
+    }
+}
+
 void BinarySearchTree::insert(std::string decoded, std::string encoded) {
     TreeNode* new_node = new TreeNode;
     new_node->decoded = decoded;

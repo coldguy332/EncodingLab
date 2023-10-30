@@ -7,6 +7,8 @@
 class BinarySearchTree {
     public:
         BinarySearchTree();
+        ~BinarySearchTree();
+        void del_tree(TreeNode* root);
         void insert(std::string decoded, std::string encoded);
         void cipher_input(std::ifstream& in_file);
         std::string find_encoded(std::string decoded);

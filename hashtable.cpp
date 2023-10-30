@@ -24,6 +24,18 @@ HashTable::HashTable() {
     }
 }
 
+HashTable::~HashTable() {
+    for (int i = 0; i < INDEX; i++) {
+        HashNode* current = arr[i];
+        while (current != nullptr ) {
+            HashNode* del = current;
+            current = current->next;
+            delete del;
+        }
+        arr[i] = nullptr;
+    }
+}
+
 void HashTable::get_data() const {
     for (int i = 0; i < 50; i++) {
         std::cout << i << " ";
