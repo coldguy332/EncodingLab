@@ -70,6 +70,8 @@ void HashTable::cipher_input(std::ifstream& in_file) {
 
         this->insert(temp_decode,temp_encode);
     }
+    in_file.clear(); //Resets error flags on a stream such as EOF
+	in_file.seekg(0);//sets position of next character to be read back to beginning of file
 }
 
 std::string HashTable::find_decoded(std::string value) {

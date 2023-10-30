@@ -5,6 +5,7 @@
 #include <sstream>
 
 #include "hashtable.h"
+#include "binarysearchtree.h"
 #include "savedata.h"
 
 /**
@@ -17,6 +18,7 @@ int line_counter(std::ifstream& in_file);
 void read_file();
 
 void decode_file(std::ifstream& in_file);
+void encode_file(std::ifstream& in_file);
 
 
 #endif

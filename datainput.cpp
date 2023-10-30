@@ -31,32 +31,57 @@ void read_file() {
 	else {
 		in_file.clear(); //Resets error flags on a stream such as EOF
 		in_file.seekg(0);//sets position of next character to be read back to beginning of file
+		encode_file(in_file);
 	}
 }
 
 void decode_file(std::ifstream& in_file) {
 	std::string temp_line;
-	std::string temp_decoded;
+	std::string temp_encoded;
 	std::string decoded_value = "";
 
 	HashTable* hash = new HashTable;
 	std::ifstream cipher;
 	cipher.open("cipher-1.txt");
 	hash->cipher_input(cipher);
-	
+	cipher.close();
+
 	getline(in_file,temp_line);
 	std::stringstream ss;
 	ss.str(temp_line);
 
-	while (getline(ss,temp_decoded, ' ')) {
-		if (temp_decoded.empty()) {
-			temp_decoded = "-1";
+	while (getline(ss,temp_encoded, ' ')) {
+		if (temp_encoded.empty()) {
+			temp_encoded = "-1";
 		}
-		decoded_value += hash->find_decoded(temp_decoded);
+		decoded_value += hash->find_decoded(temp_encoded);
 	}
 	
 	std::cout << std::endl << "Decoded text: " << decoded_value << std::endl;
 	std::cout << "Saving to output.txt..." << std::endl;
 	output_data(temp_line, decoded_value);
+}
+
+void encode_file(std::ifstream& in_file) {
+	std::string temp_line;
+	std::string temp_decoded;
+	std::string encoded_value = "";
+
+	BinarySearchTree* tree = new BinarySearchTree;
+	std::ifstream cipher;
+	cipher.open("cipher-1.txt");
+	tree->cipher_input(cipher);
+	cipher.close();
+
+	getline(in_file,temp_line);
+	std::stringstream ss;
+	ss.str(temp_line);
+	
+	while (getline(ss, temp_decoded, ' ')) {
+		encoded_value += tree->find_encoded(temp_decoded);
+	}
+	std::cout << std::endl << "Encoded text: " << encoded_value << std::endl;
+	std::cout << "Saving to output.txt..." << std::endl;
+	output_data(temp_line, encoded_value);
 	
 }
