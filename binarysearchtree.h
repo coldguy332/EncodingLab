@@ -11,7 +11,8 @@ class BinarySearchTree {
         void del_tree(TreeNode* root);
         void insert(std::string decoded, std::string encoded);
         void cipher_input(std::ifstream& in_file);
-        std::string find_encoded(std::string decoded);
+        void find_encoded(std::string& return_value, std::string char_value);
+        void find_encoded(TreeNode*& parent, std::string& return_value, std::string char_value);
         void print() const;
     private:
         void print(TreeNode* parent) const;

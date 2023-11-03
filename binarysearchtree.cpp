@@ -48,6 +48,25 @@ void BinarySearchTree::cipher_input(std::ifstream& in_file) {
 	in_file.seekg(0);//sets position of next character to be read back to beginning of file
 }
 
+void BinarySearchTree::find_encoded(std::string& return_value, std::string char_value) {
+    find_encoded(this->root, return_value, char_value);
+}
+
+void BinarySearchTree::find_encoded(TreeNode*& parent,std::string& return_value, std::string char_value) {
+    if (parent == nullptr) { //Checks if parent is valid
+        return ;
+    }
+    if (char_value == parent->decoded) { //if the decoded value matches decoded value in parent node
+        return_value += parent->encoded;  //return value adds in the parent node
+        return ; //Breaks out of recursion
+    }
+    else { //Else checks left and right trees
+        find_encoded(parent->left, return_value, char_value);
+        find_encoded(parent->right, return_value, char_value);
+    }
+}
+
+/*
 std::string BinarySearchTree::find_encoded(std::string decoded) {
     std::string return_value = "";
     for (int i = 0; i < decoded.size(); i++) {
@@ -73,6 +92,8 @@ std::string BinarySearchTree::find_encoded(std::string decoded) {
     }
     return return_value;
 }
+
+*/
 
 void BinarySearchTree::print() const {
     print(this->root);

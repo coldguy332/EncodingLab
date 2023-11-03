@@ -9,6 +9,7 @@
 **/
 void welcome_statement();
 
+void custom_file();
 
 
 #endif
