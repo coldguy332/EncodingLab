@@ -28,10 +28,11 @@ void custom_file() {
             }
             else if (choice == 'N' || choice == 'n') {
                 std::string filename;
-                std::cout << std::endl << "Enter the name of the file:";
+                std::cout << std::endl << "Enter the name of the file (please add .txt):";
                 std::cin >>filename;
                 read_file(filename);
             }
+            return ;
         }
         else if (choice == 'N' || choice == 'n') {
             break;
