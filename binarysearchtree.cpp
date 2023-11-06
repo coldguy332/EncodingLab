@@ -1,24 +1,22 @@
 #include "binarysearchtree.h"
 
+
 BinarySearchTree::BinarySearchTree() {
     this->root = nullptr;
 }
 
 BinarySearchTree::~BinarySearchTree() {
-    del_tree(root);
+    del_tree(root); 
 }
 
-void BinarySearchTree::del_tree(TreeNode* root) {
-    if (root == nullptr) {
+void BinarySearchTree::del_tree(TreeNode*& root) {
+    if (root == nullptr) { // if node is null, return
         return ;
     }
     else {
-        TreeNode* del = root;
-        TreeNode* left = root->left;
-        TreeNode* right = root->right;
-        delete del;
-        del_tree(left);
-        del_tree(right);
+        del_tree(root->left); //recursively deletes roots of left and right subtrees
+        del_tree(root->right); //deletes in post order
+        delete root;
     }
 }
 
@@ -31,23 +29,42 @@ void BinarySearchTree::insert(std::string decoded, std::string encoded) {
 }
 
 void BinarySearchTree::cipher_input(std::ifstream& in_file) {
-    int num_of_lines = line_counter(in_file);
-    std::string temp_line;
-    std::string temp_encode;
-    std::string temp_decode;
-    for (int i = 0; i < num_of_lines; i++) {
-        getline(in_file,temp_line);
-        std::stringstream ss;
-        ss.str(temp_line);
-        getline(ss, temp_decode, '\t');
-        getline(ss, temp_encode);
+    int num_of_lines = line_counter(in_file); //Counts number of lines in the cipher
+    std::string temp_line; //Will store a line
+    std::string temp_encode; //Will store an encoded value (ex: "0010")
+    std::string temp_decode; //Will store a decoded value (ex: 'A')
+    for (int i = 0; i < num_of_lines; i++) { //Loop that cycles until the end of file
+        getline(in_file,temp_line); //stores lines into the temp line
+        std::stringstream ss; //stringstream necessary to parse the line
+        ss.str(temp_line); //stringstream takes in the value of the templine
+        getline(ss, temp_decode, '\t'); //stores decoded value into temp_decode
+        getline(ss, temp_encode); //stores encoded value into temp_encode
 
-        this->insert(temp_decode,temp_encode);
+        this->insert(temp_decode,temp_encode); //Creates newnode with this data and inserts into binary tree
     }
     in_file.clear(); //Resets error flags on a stream such as EOF
 	in_file.seekg(0);//sets position of next character to be read back to beginning of file
 }
 
+void BinarySearchTree::find_encoded(std::string& return_encoded, std::string decoded_value) {
+    find_encoded(this->root, return_encoded, decoded_value);
+}
+
+void BinarySearchTree::find_encoded(TreeNode*& parent,std::string& return_encoded, std::string decoded_value) {
+    if (parent == nullptr) { //Checks if parent is valid
+        return ;
+    }
+    if (decoded_value == parent->decoded) { //if the decoded value matches decoded value in parent node
+        return_encoded += parent->encoded;  //return value that continuously adds encoded values
+        return ; //Breaks out of recursion
+    }
+    else { //Else checks left and right trees to find the correct value
+        find_encoded(parent->left, return_encoded, decoded_value);
+        find_encoded(parent->right, return_encoded, decoded_value);
+    }
+}
+
+/*
 std::string BinarySearchTree::find_encoded(std::string decoded) {
     std::string return_value = "";
     for (int i = 0; i < decoded.size(); i++) {
@@ -74,21 +91,10 @@ std::string BinarySearchTree::find_encoded(std::string decoded) {
     return return_value;
 }
 
-void BinarySearchTree::print() const {
-    print(this->root);
-    std::cout << std::endl;
-}
+*/
 
 
-
-void BinarySearchTree::print(TreeNode* parent) const {
-    if (parent == nullptr) {return;}
-    print(parent->left);
-    std::cout << parent->decoded << " " << parent->encoded << " " << std::endl;
-    print(parent->right);
-}
-
-void BinarySearchTree::add_node(TreeNode* parent, TreeNode* new_node) const {
+void BinarySearchTree::add_node(TreeNode*& parent, TreeNode*& new_node)  {
     if (new_node->decoded < parent->decoded) {
         if (parent->left == nullptr) {parent->left = new_node;}
         else {add_node(parent->left, new_node);}
