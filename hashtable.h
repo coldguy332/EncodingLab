@@ -12,12 +12,14 @@
 const int INDEX = 50; //Hash table size is 50
 
 /**
- * Hash code function that will provide index for hash table
+ * Takes in a string and creates an array position to be stored at
+ * Ripped from zybooks
+ * @https://learn.zybooks.com/zybook/OHLONECS124ChenhansaFall2023/chapter/16/section/5
 */
 int hash_code(const std::string& decode);
 
 /**
- * Hash Table that will encode (A to 00)
+ * Hash Table class that will be used to decode (ex: 00 to a)
 */
 class HashTable {
     public:
@@ -25,19 +27,27 @@ class HashTable {
          * Default constructor that sets all ptrs of hashtable to null
         */
         HashTable();
+        /**
+         * Destructor for hash table objects
+        */
         ~HashTable();
-
-        void get_data() const;
 
         /**
          * Inserts encoded value into hash table
-         * @param decode this string will be used to make the hash code
-         * @param encode this string will be stored in array under that hash code
+         * @param decode decoded value to be stored in hash table
+         * @param encode encoded value to be stored in hash table
         */
         void insert(const std::string& decode, const std::string& encode);
+        /**
+         * Inputs cipher data into hash table
+         * @param in_file filestream that holds cipher text file
+        */
         void cipher_input(std::ifstream& in_file);
 
-        std::string find_decoded(std::string value);
+        /**
+         * @return a decoded value for every encoded value
+        */
+        std::string find_decoded(std::string encoded_value);
     private:
         HashNode *arr[50]; 
 };

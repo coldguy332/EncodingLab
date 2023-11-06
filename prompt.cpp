@@ -7,7 +7,7 @@ void welcome_statement() {
     std::cout << "Would you like to continue(Y/n):" ;
     std::cin >> choice;
     if (choice == 'Y' || choice == 'y') {
-        read_file("textfile.txt");
+        read_file("textfile.txt"); //textfile.txt is the default txt name
     }
     else if (choice == 'N' || choice == 'n') {
         exit(0);

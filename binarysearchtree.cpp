@@ -30,7 +30,7 @@ void BinarySearchTree::insert(std::string decoded, std::string encoded) {
 
 void BinarySearchTree::cipher_input(std::ifstream& in_file) {
     int num_of_lines = line_counter(in_file); //Counts number of lines in the cipher
-    std::string temp_line; //Will store a line
+    std::string temp_line; //Will store line in txt file
     std::string temp_encode; //Will store an encoded value (ex: "0010")
     std::string temp_decode; //Will store a decoded value (ex: 'A')
     for (int i = 0; i < num_of_lines; i++) { //Loop that cycles until the end of file

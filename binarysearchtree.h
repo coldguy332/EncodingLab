@@ -4,6 +4,9 @@
 #include "treenode.h"
 #include "datainput.h"
 
+/**
+ * Binary search tree will be used to encode, (ex: a to 00)
+*/
 class BinarySearchTree {
     public:
         /**

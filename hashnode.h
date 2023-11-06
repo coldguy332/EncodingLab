@@ -4,13 +4,13 @@
 #include <iostream>
 
 /**
- * Assuming collisions occur, going to use bucket method
- * Will be two separate nodes in general from hash table and tree
- * Hash node needs a next ptr while tree needs left&right ptr
+ * Node that will be stored in hashtable
 */
 struct HashNode{
-    std::string decoded;
-    std::string encoded;
+    //Extra string needed to return the right value 
+    //(ex: if encoded == node->encoded , return 'e')
+    std::string decoded; //This will hold a decoded value
+    std::string encoded; //This will hold an encoded value
     HashNode* next = nullptr;
 };
 

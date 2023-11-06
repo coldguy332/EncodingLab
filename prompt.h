@@ -9,6 +9,10 @@
 **/
 void welcome_statement();
 
+/**
+ * Allows user to re-use the program
+ * User can run the original text file or a text file of their discretion
+*/
 void custom_file();
 
 
