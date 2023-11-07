@@ -54,14 +54,12 @@ void BinarySearchTree::find_encoded(TreeNode*& parent,std::string& return_encode
     if (parent == nullptr) { //Checks if parent is valid
         return ;
     }
+    find_encoded(parent->left, return_encoded, decoded_value);
     if (decoded_value == parent->decoded) { //if the decoded value matches decoded value in parent node
         return_encoded += parent->encoded;  //return value that continuously adds encoded values
         return ; //Breaks out of recursion
     }
-    else { //Else checks left and right trees to find the correct value
-        find_encoded(parent->left, return_encoded, decoded_value);
-        find_encoded(parent->right, return_encoded, decoded_value);
-    }
+    find_encoded(parent->right, return_encoded, decoded_value);
 }
 
 /*
