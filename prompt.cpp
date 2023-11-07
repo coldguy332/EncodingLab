@@ -7,7 +7,10 @@ void welcome_statement() {
     std::cout << "Would you like to continue(Y/n):" ;
     std::cin >> choice;
     if (choice == 'Y' || choice == 'y') {
-        read_file("textfile.txt"); //textfile.txt is the default txt name
+        std::string filename;
+        std::cout << std::endl << "Enter the name of the file (please add .txt):"; 
+        std::cin >> filename;
+        read_file(filename); 
     }
     else if (choice == 'N' || choice == 'n') {
         exit(0);
@@ -19,24 +22,16 @@ void custom_file() {
     std::cout <<  std::endl << "Output has been saved. Would you like to re-use the program?(Y/n):" ; 
     std::cin >> choice;
     if (choice == 'Y' || choice == 'y') {
-        std::cout <<std::endl << "Would you like to use the original file or a new file?(Y/n): ";
-        std::cin >> choice;
-        if (choice == 'Y' || choice == 'y') {
-            std::cout << "Opening original file..." << std::endl;
-            read_file("textfile.txt");
-        }
-        else if (choice == 'N' || choice == 'n') {
-            std::string filename;
-            std::cout << std::endl << "Enter the name of the file (please add .txt):";
-            std::cin >>filename;
-            read_file(filename);
-        }
-            return ;
+        std::string filename;
+        std::cout << std::endl << "Enter the name of the file (please add .txt):";
+        std::cin >>filename;
+        read_file(filename);
+        return ;
     }
     else if (choice == 'N' || choice == 'n') {
+        std::cout << std::endl << "Thanks for using program!!!";
         return ;
     }       
-    
 }
 
 

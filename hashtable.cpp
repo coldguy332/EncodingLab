@@ -78,7 +78,13 @@ std::string HashTable::find_decoded(std::string encoded_value) {
         while (current != nullptr && current->encoded != encoded_value) { 
             current = current->next; //current traverses until the appropriate node is found
         }
-        return_value += current->decoded; //return value takes in the appropriate decoded value
+        if (current == nullptr) { //If no encoded value can be found in the hash table
+            std::cout << std::endl << "WARNING: Unrecognized value: " << encoded_value << std::endl;
+            return_value += "?"; //Question mark will represent an unknown
+        }
+        else {
+            return_value += current->decoded;  //return value takes in the appropriate decoded value
+        }
     }
     return return_value; //decoded value gets returned
 }

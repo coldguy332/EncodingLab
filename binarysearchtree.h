@@ -1,6 +1,9 @@
 #ifndef BINARYSEARCHTREE_H
 #define BINARYSEARCHTREE_H
 
+#include "iostream"
+#include "fstream"
+
 #include "treenode.h"
 #include "datainput.h"
 

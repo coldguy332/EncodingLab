@@ -17,6 +17,19 @@
 int line_counter(std::ifstream& in_file);
 
 /**
+ * Finds the last encoded value in the cipher
+ * (ie: apostrophe is last in file and = 10111)
+ * Will be used as a reference number to add unknown values to the cipher
+*/
+int find_last_encoded_value(std::ifstream& in_file);
+
+/**
+ * Checks if a char is in the current cipher
+ * Will be used to make sure no duplicate values will be in the cipher
+*/
+bool find_specific_decoded_value(std::string decode);
+
+/**
  * Reads in a txt file from folder directory
  * Calls functions that encodes or decodes based on txt content
  * @param filename the name of txt file

@@ -47,7 +47,32 @@ void BinarySearchTree::cipher_input(std::ifstream& in_file) {
 }
 
 void BinarySearchTree::find_encoded(std::string& return_encoded, std::string decoded_value) {
-    find_encoded(this->root, return_encoded, decoded_value);
+    std::string encode = ""; //This string will hold the encoded value derived from the decoded value
+    find_encoded(this->root, encode, decoded_value); //This function will return a value to string encode
+    if (encode.empty()) {  //If string encode, or no encoded value could be found (meaning not in cipher)
+        return_encoded += "?"; //program outputs a question mark to return_encoded, signifying a missing value
+
+        /* Instead of creating a new cipher file, I just wanted to append to the original cipher.
+        To make sure that there is no duplicate values, "!find_specific_decoded_value(decoded_value)" is a boolean
+        function from datainput.h that checks if the decoded_value already exists  */
+
+        if (!find_specific_decoded_value(decoded_value)) { //If decoded_value doesn't exist
+            std::cout << std::endl << "Not in cipher: " << decoded_value << std::endl;
+            std::ifstream in;
+            std::ofstream off;
+            in.open("cipher-1.txt");
+            int encode = find_last_encoded_value(in); //Finds the last encoded value in the cipher (''' = 10111)
+            in.close();
+            off.open("cipher-1.txt" , std::ios::app); //Opens the cipher, but appends to it instead of creating a new cipher
+
+            //saves the new decoded value, its encoded value will just be previous last encoded value + 1
+            off << std::endl << decoded_value << '\t' << encode + 1 ; 
+            off.close();
+        }
+    }
+    else { //return_encoded is set to the found encoded value
+        return_encoded += encode;
+    }
 }
 
 void BinarySearchTree::find_encoded(TreeNode*& parent,std::string& return_encoded, std::string decoded_value) {

@@ -17,6 +17,55 @@ int line_counter(std::ifstream& in_file) {
 	return index; //Returns index number
 }
 
+int find_last_encoded_value(std::ifstream& in_file) {
+	std::string temp_line;
+	std::string temp_decode;
+	std::string temp_encode;
+	int index = line_counter(in_file);
+	for (int i = 0; i < index;i++) {
+		getline(in_file,temp_line);
+		if (i == index - 1) { //want to get to the last index to find the last encoded value
+			std::stringstream ss; 
+       	 	ss.str(temp_line); 
+			getline(ss, temp_decode, '\t'); //stores decoded value into temp_decode
+        	getline(ss, temp_encode); //stores encoded value into temp_encode
+		}
+	}
+	int encode = stoi(temp_encode); //Last encoded value in cipher 
+
+	in_file.clear(); //Resets error flags on a stream such as EOF
+	in_file.seekg(0);//sets position of next character to be read back to beginning of file
+
+	return encode;
+}
+
+bool find_specific_decoded_value(std::string decode) {
+	std::ifstream in_file;
+	std::string file_name;
+	in_file.open("cipher-1.txt");
+	std::string temp_line;
+	std::string temp_decode;
+	std::string temp_encode;
+	int index = line_counter(in_file);
+	for (int i = 0; i < index; i++) {
+		getline(in_file,temp_line);
+		std::stringstream ss; //stringstream necessary to parse the line
+       	ss.str(temp_line); //stringstream takes in the value of the templine
+		getline(ss, temp_decode, '\t'); //stores decoded value into temp_decode
+        getline(ss, temp_encode); //stores encoded value into temp_encode
+
+		if (decode == temp_decode) { //If the decoded value exists in the cipher
+			return true;
+		}
+	}
+	in_file.clear(); //Resets error flags on a stream such as EOF
+	in_file.seekg(0);//sets position of next character to be read back to beginning of file
+	in_file.close();
+
+	return false; //If the decoded value doesn't exist in the cipher
+	
+}
+
 void read_file(std::string filename) {
 	std::string temp_line; //string that holds a line of text
 	std::ifstream in_file;
