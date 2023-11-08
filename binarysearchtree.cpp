@@ -1,3 +1,5 @@
+// Created by Amal Afsal for Encoding lab on 10/29/23.
+
 #include "binarysearchtree.h"
 
 
@@ -56,12 +58,12 @@ void BinarySearchTree::find_encoded(std::string& return_encoded, std::string dec
         To make sure that there is no duplicate values, "!find_specific_decoded_value(decoded_value)" is a boolean
         function from datainput.h that checks if the decoded_value already exists  */
 
-        if (!find_specific_decoded_value(decoded_value)) { //If decoded_value doesn't exist
+        if (!find_specific_decoded_value(decoded_value)) { //(from data_input.h) If decoded_value doesn't exist
             std::cout << std::endl << "Not in cipher: " << decoded_value << std::endl;
             std::ifstream in;
             std::ofstream off;
             in.open("cipher-1.txt");
-            int encode = find_last_encoded_value(in); //Finds the last encoded value in the cipher (''' = 10111)
+            int encode = find_last_encoded_value(in); // (from data_input.h) Finds the last encoded value in the cipher (''' = 10111)
             in.close();
             off.open("cipher-1.txt" , std::ios::app); //Opens the cipher, but appends to it instead of creating a new cipher
 
@@ -87,34 +89,6 @@ void BinarySearchTree::find_encoded(TreeNode*& parent,std::string& return_encode
     find_encoded(parent->right, return_encoded, decoded_value);
 }
 
-/*
-std::string BinarySearchTree::find_encoded(std::string decoded) {
-    std::string return_value = "";
-    for (int i = 0; i < decoded.size(); i++) {
-        std::string char_value(1,decoded[i]);
-        TreeNode* current = this->root;
-        while (current != nullptr) {
-            if (char_value < current->decoded) {
-                current = current->left;
-            }
-            else if (char_value > current->decoded) {
-                current = current->right;
-            }
-            else {
-                break;
-            }
-        }
-        if (i != decoded.size() - 1) {
-            return_value += current->encoded + " ";
-        }
-        else {
-            return_value += current->encoded + "  ";
-        }
-    }
-    return return_value;
-}
-
-*/
 
 
 void BinarySearchTree::add_node(TreeNode*& parent, TreeNode*& new_node)  {

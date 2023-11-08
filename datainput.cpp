@@ -1,3 +1,5 @@
+// Created by Amal Afsal for Encoding lab on 10/28/23.
+
 #include "datainput.h"
 
 int line_counter(std::ifstream& in_file) {

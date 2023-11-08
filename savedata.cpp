@@ -1,3 +1,5 @@
+// Created by Amal Afsal for Encoding lab on 10/29/23.
+
 #include "savedata.h"
 
 void output_data(std::string a, std::string b) {
@@ -8,5 +10,6 @@ void output_data(std::string a, std::string b) {
       depending on if it was encoded or decoded. 
       ex: if program decoded, 'a' will store the original encoded text, 'b' will store the decoded text
       ex: if program encoded, 'a' will store the original decoded text, 'b' will store the encoded text
+      it's either one or the other
     */
 }

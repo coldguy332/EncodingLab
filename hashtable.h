@@ -1,3 +1,5 @@
+// Created by Amal Afsal for Encoding lab on 10/28/23.
+
 #ifndef HASHTABLE_H
 #define HASHTABLE_H
 

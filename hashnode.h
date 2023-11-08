@@ -1,3 +1,5 @@
+// Created by Amal Afsal for Encoding lab on 10/28/23.
+
 #ifndef HASHNODE_H
 #define HASHNODE_H
 

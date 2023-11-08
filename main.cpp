@@ -1,3 +1,5 @@
+// Created by Amal Afsal for Encoding lab on 10/27/23.
+
 #include <iostream>
 #include <fstream>
 

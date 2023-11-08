@@ -1,5 +1,6 @@
-#include "hashtable.h"
+// Created by Amal Afsal for Encoding lab on 10/28/23.
 
+#include "hashtable.h"
 
 int hash_code(const std::string& decode) {
    int h = 0;
